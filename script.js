@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---- Reveal suave al hacer scroll ----
   const revealTargets = document.querySelectorAll(
-    '.feat-card, .link-card, .workshop-card, .tide-list li, .contact-link, .photo-card, .profile-banner'
+    '.feat-card, .link-card, .workshop-card, .tide-list li, .contact-link, .photo-card, .profile-banner, .widget-card'
   );
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

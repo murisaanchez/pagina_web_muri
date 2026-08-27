@@ -1,9 +1,4 @@
-/* ============================================================
-   MURIEL SÁNCHEZ — PORTFOLIO
-   Paleta: abismo #071C3C · teal #0E7C86 · espuma #CFEDE8
-           arena #FBF6EE · coral #FF6B4A · oro #FFB648
-   Tipografía: Fraunces (display) / Inter (texto) / Space Mono (data)
-   ============================================================ */
+
 
 :root{
   --abismo: #071C3C;
@@ -97,6 +92,24 @@ ul{ list-style: none; margin: 0; padding: 0; }
 }
 .lead--narrow{ margin-bottom: 40px; }
 
+/* ---------- widgets (home) ---------- */
+.widgets{ display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 44px; }
+.widget-card{
+  display: flex; flex-direction: column; gap: 14px;
+  background: #fff; border: 1px solid rgba(7,28,60,0.08);
+  border-radius: var(--radius); padding: 36px 34px;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.widget-card:hover{ transform: translateY(-4px); border-color: var(--coral); box-shadow: 0 20px 40px -20px rgba(7,28,60,0.22); }
+.widget-card__num{
+  font-family: var(--font-mono); font-size: 12px; color: var(--coral-dark);
+  border: 1px solid rgba(232,84,54,0.35); border-radius: 100px;
+  padding: 4px 11px; display: inline-block; width: fit-content;
+}
+.widget-card__title{ font-family: var(--font-display); font-size: 24px; font-weight: 600; color: var(--abismo); margin: 0; }
+.widget-card__desc{ color: #33475a; font-size: 15px; line-height: 1.65; margin: 0; flex-grow: 1; }
+.widget-card__arrow{ font-family: var(--font-mono); font-size: 13px; color: var(--coral-dark); align-self: flex-start; }
+
 /* ============================================================
    NAV
    ============================================================ */
@@ -126,6 +139,53 @@ ul{ list-style: none; margin: 0; padding: 0; }
   transition: border-color .2s, color .2s;
 }
 .nav__links a:hover{ color: var(--oro); border-color: var(--oro); }
+.nav__links a.is-active{ color: var(--oro); border-color: var(--oro); }
+
+/* ---------- page-header (para páginas internas sin hero completo) ---------- */
+.page-header{
+  padding: 168px 0 70px;
+  background: linear-gradient(180deg, #030F22 0%, var(--abismo) 45%, var(--abismo-2) 100%);
+}
+.page-header .eyebrow{ margin-bottom: 14px; }
+.page-header__title{
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(38px, 6vw, 64px);
+  color: var(--arena);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- widgets (portada simple) ---------- */
+.widgets{ display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 44px; }
+.widget-card{
+  display: flex; flex-direction: column; gap: 14px;
+  background: linear-gradient(160deg, var(--abismo-2) 0%, var(--abismo) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius); padding: 34px 32px;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.widget-card:hover{ transform: translateY(-4px); border-color: var(--teal-light); box-shadow: 0 24px 48px -20px rgba(7,28,60,0.5); }
+.widget-card__icon{
+  width: 50px; height: 50px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(71,169,172,0.18); border: 1px solid rgba(71,169,172,0.4);
+  color: var(--teal-light);
+}
+.widget-card__icon svg{ width: 24px; height: 24px; }
+.widget-card__title{ font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--arena); }
+.widget-card__text{ font-size: 15px; line-height: 1.65; color: rgba(207,237,232,0.75); margin: 0; }
+.widget-card__arrow{ margin-top: auto; font-family: var(--font-mono); font-size: 12.5px; color: var(--oro); }
+
+/* ---------- footer simple (páginas sin sección de contacto completa) ---------- */
+.site-footer{
+  background: var(--abismo);
+  padding: 8px 0;
+}
+.site-footer .footer-bottom{
+  border-top-color: rgba(255,255,255,0.12);
+  color: rgba(207,237,232,0.6);
+}
 .nav__cta{
   color: var(--abismo) !important;
   background: var(--oro);
@@ -213,6 +273,8 @@ ul{ list-style: none; margin: 0; padding: 0; }
 .btn--primary:hover{ background: var(--oro); color: var(--abismo); transform: translateY(-2px); }
 .btn--ghost{ border: 1px solid rgba(255,255,255,0.35); color: var(--arena); }
 .btn--ghost:hover{ border-color: var(--oro); color: var(--oro); transform: translateY(-2px); }
+.btn--ghost-dark{ border: 1px solid rgba(7,28,60,0.3); color: var(--abismo); }
+.btn--ghost-dark:hover{ border-color: var(--coral); color: var(--coral-dark); transform: translateY(-2px); }
 
 .hero__scroll{
   position: absolute; bottom: 34px; left: 40px; z-index: 2;
@@ -410,6 +472,8 @@ ul{ list-style: none; margin: 0; padding: 0; }
   .wrap--split{ grid-template-columns: 1fr; gap: 40px; }
   .cards-2{ grid-template-columns: 1fr; }
   .workshops{ grid-template-columns: 1fr; }
+  .widgets{ grid-template-columns: 1fr; }
+  .widgets{ grid-template-columns: 1fr; }
   .nav__links{ display: none; }
   .nav__burger{ display: block; }
 }
