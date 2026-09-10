@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Encargo 1 — Muriel Sánchez</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f1ea;
+            color: #172a46;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 25px 5vw;
+
+            border-bottom: 1px solid #172a46;
+        }
+
+        .logo {
+            color: #172a46;
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .volver {
+            color: #172a46;
+            text-decoration: none;
+
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .volver:hover {
+            color: #e46f45;
+        }
+
+        main {
+            padding: 0 5vw;
+        }
+
+        .intro {
+            padding: 80px 0 60px;
+
+            max-width: 900px;
+        }
+
+        .numero {
+            font-size: 12px;
+            letter-spacing: 2px;
+
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(60px, 10vw, 130px);
+            line-height: 0.85;
+
+            letter-spacing: -5px;
+        }
+
+        h1 span {
+            color: #e46f45;
+        }
+
+        .descripcion {
+            max-width: 500px;
+
+            margin-top: 40px;
+
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        .versiones {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 15px;
+
+            padding-bottom: 100px;
+        }
+
+        .version {
+            position: relative;
+
+            min-height: 280px;
+
+            padding: 30px;
+
+            border: 1px solid #172a46;
+
+            color: #172a46;
+            text-decoration: none;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            transition: 0.3s ease;
+        }
+
+        .version:hover {
+            background-color: #172a46;
+            color: #f4f1ea;
+
+            transform: translateY(-5px);
+        }
+
+        .version-numero {
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .version h2 {
+            font-size: 42px;
+            letter-spacing: -2px;
+        }
+
+        .version p {
+            font-size: 14px;
+            line-height: 1.4;
+            max-width: 300px;
+        }
+
+        .flecha {
+            position: absolute;
+
+            right: 30px;
+            bottom: 25px;
+
+            font-size: 30px;
+            font-weight: normal;
+        }
+
+        footer {
+            border-top: 1px solid #172a46;
+
+            padding: 20px 5vw;
+
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 20px;
+            }
+
+            main {
+                padding: 0 20px;
+            }
+
+            .intro {
+                padding: 60px 0 40px;
+            }
+
+            h1 {
+                font-size: 65px;
+                letter-spacing: -3px;
+            }
+
+            .versiones {
+                grid-template-columns: 1fr;
+            }
+
+            .version {
+                min-height: 230px;
+            }
+
+            footer {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <header>
+
+        <a href="../index.html" class="logo">
+            MURIEL SÁNCHEZ
+        </a>
+
+        <a href="../index.html" class="volver">
+            ← Volver
+        </a>
+
+    </header>
+
+
+    <main>
+
+        <section class="intro">
+
+            <p class="numero">
+                ENCARGO 01
+            </p>
+
+            <h1>
+                MI<br>
+                <span>PÁGINA WEB</span>
+            </h1>
+
+            <p class="descripcion">
+                Desarrollo de una página web personal
+                a través de HTML, CSS y JavaScript.
+                Se presentan dos versiones del ejercicio.
+            </p>
+
+        </section>
+
+
+        <section class="versiones">
+
+
+            <!-- VERSION 1 -->
+
+            <a href="version-01/index.html" class="version">
+
+                <span class="version-numero">
+                    VERSIÓN 01
+                </span>
+
+                <div>
+
+                    <h2>Versión 01</h2>
+
+                    <p>
+                        Primera aproximación al desarrollo
+                        de mi página web personal.
+                    </p>
+
+                </div>
+
+                <span class="flecha">
+                    →
+                </span>
+
+            </a>
+
+
+            <!-- VERSION 2 -->
+
+            <a href="version-02/index.html" class="version">
+
+                <span class="version-numero">
+                    VERSIÓN 02
+                </span>
+
+                <div>
+
+                    <h2>Versión 02</h2>
+
+                    <p>
+                        Segunda versión del sitio,
+                        incorporando nuevas secciones
+                        y mejoras visuales.
+                    </p>
+
+                </div>
+
+                <span class="flecha">
+                    →
+                </span>
+
+            </a>
+
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>PUCV · Diseño</p>
+
+        <p>Encargo 01</p>
+
+    </footer>
+
+</body>
+
+</html>
