@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encargo 3: Análisis de Sitios Web</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="portada">
+    <div class="contenedor">
+      <h1>
+        ANÁLISIS DE<br>
+        <span class="acento">SITIOS WEB</span>
+      </h1>
+      <p class="bajada">
+        Comparación entre un sitio editorial (Stab Magazine) y una plataforma
+        deportiva en vivo (World Surf League), observando cómo cada uno resuelve
+        el scroll, la distribución en columnas y la adaptación a mobile.
+      </p>
+
+            <div class="tarjetas-intro">
+        <a href="#stab" class="tarjeta-intro tarjeta-intro--azul">
+          <span class="etiqueta">Sitio 01</span>
+          <div class="tarjeta-intro-abajo">
+            <div>
+              <h2>stabmag.com</h2>
+              <p>Revista editorial de surf, construida en WordPress + Elementor.</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="#wsl" class="tarjeta-intro tarjeta-intro--naranja">
+          <span class="etiqueta">Sitio 02</span>
+          <div class="tarjeta-intro-abajo">
+            <div>
+              <h2>worldsurfleague.com</h2>
+              <p>Plataforma de competencias de surf en vivo.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+  <main class="contenedor">
+
+    <!-- ================= SITIO 1: STAB MAGAZINE ================= -->
+    <section class="sitio" id="stab">
+      <div class="sitio-encabezado">
+        <span class="etiqueta etiqueta--oscura">Sitio editorial</span>
+        <h2>stabmag.com</h2>
+        <p>
+          Revista digital de surf con foco en video y artículos largos.
+          Construida sobre WordPress con el maquetador Elementor.
+        </p>
+      </div>
+
+      <div class="capturas">
+        <figure class="captura captura--desktop">
+          <img src="imagenes/Captura de pantalla 2026-09-10 a la(s) 7.46.28 p.m..png" alt="Vista escritorio de stabmag.com">
+          <figcaption>Vista escritorio</figcaption>
+        </figure>
+        <figure class="captura captura--mobile">
+          <img src="imagenes/IMG_2852 2.jpg" alt="Vista mobile (iPhone) de stabmag.com">
+          <figcaption>Vista mobile (iPhone, DevTools)</figcaption>
+        </figure>
+      </div>
+
+      <div class="analisis-grid">
+
+        <article class="tarjeta-analisis">
+          <h3>Elementos fijos vs. en movimiento</h3>
+          <p>
+            La barra superior con el logo y el buscador queda <strong>fija (sticky)</strong>
+            mientras el resto del contenido se desplaza debajo. En el código fuente el
+            encabezado aparece dos veces: una versión con el logo en blanco (para el estado
+            inicial, sobre el video destacado) y otra con el logo en negro, que es la que
+            se activa cuando el usuario baja y el fondo deja de ser oscuro.
+          </p>
+          <p>
+            El resto video destacado, grillas de notas, footer se mueve con normalidad
+            junto al scroll.
+          </p>
+        </article>
+
+        <article class="tarjeta-analisis">
+          <h3>Distribución en columnas</h3>
+          <p>
+            La portada no usa una sola grilla, sino varios bloques con distintos
+            números de columnas según el tipo de contenido:
+          </p>
+          <ul>
+            <li>"Most Recent" y "Top Stories": lista vertical de una columna con imagen a un costado.</li>
+            <li>"Elsewhere" y "Stab Classics": grilla de tarjetas en varias columnas (tipo mosaico).</li>
+            <li>"Editor's Picks": carrusel horizontal de tarjetas con miniatura + duración del video.</li>
+          </ul>
+          <p>
+            Esto sugiere que el sitio combina <code>display: grid</code> para las
+            secciones de mosaico y <code>flex</code> o listas simples para los bloques
+            de una sola columna.
+          </p>
+        </article>
+
+        <article class="tarjeta-analisis">
+          <h3>Comportamiento en mobile</h3>
+          <p>
+            El sitio declara en su meta información breakpoints personalizados de
+            Elementor (<code>additional_custom_breakpoints</code>), lo que indica que el
+            layout no depende solo del breakpoint por defecto del framework, sino que
+            fue ajustado a mano para distintos anchos.
+          </p>
+          <p>
+            Las grillas de varias columnas colapsan a una sola columna, y el menú con
+            submenús desplegables (Premium, News, Hardware) se convierte en un
+            menú hamburguesa con acordeón.
+          </p>
+        </article>
+
+        <article class="tarjeta-analisis">
+          <h3>Nuestra opinión</h3>
+          <p>
+            El header fijo tiene sentido en un sitio de consumo de video: el usuario
+            navega mucho y siempre necesita el buscador y el logo a mano. Lo que
+            nos parece menos prolijo es la cantidad de submenús anidados
+            (Premium - Categorías - Editor's Picks - notas individuales); en mobile
+            eso puede volverse un acordeón muy largo de recorrer.
+          </p>
+          <p>
+            Ajustaríamos el menú mobile a máximo dos niveles de profundidad, y
+            dejaríamos los enlaces a notas específicas fuera del menú de navegación.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ================= SITIO 2: WORLD SURF LEAGUE ================= -->
+    <section class="sitio" id="wsl">
+      <div class="sitio-encabezado">
+        <span class="etiqueta etiqueta--oscura">Plataforma deportiva</span>
+        <h2>worldsurfleague.com</h2>
+        <p>
+          Plataforma oficial de competencias de surf: transmite eventos en vivo,
+          rankings y noticias del circuito mundial.
+        </p>
+      </div>
+
+      <div class="capturas">
+        <figure class="captura captura--desktop">
+          <img src="imagenes/Captura de pantalla 2026-09-10 a la(s) 7.46.21 p.m..png" alt="Vista escritorio de worldsurfleague.com">
+          <figcaption>Vista escritorio</figcaption>
+        </figure>
+        <figure class="captura captura--mobile">
+          <img src="imagenes/IMG_2851 2.jpg" alt="Vista mobile (iPhone) de worldsurfleague.com">
+          <figcaption>Vista mobile (iPhone, DevTools)</figcaption>
+        </figure>
+      </div>
+
+      <div class="analisis-grid">
+
+        <article class="tarjeta-analisis">
+          <h3>Elementos fijos vs. en movimiento</h3>
+          <p>
+            Al igual que Stab, la barra superior con el logo, el buscador y el acceso
+            a cuenta permanece fija al hacer scroll. La diferencia es que aquí el menú
+            principal (Schedule, Rankings, Surfers, Fantasy, Store) tiene varios
+            desplegables con listas largas de torneos y categorías, así que el header
+            fijo cumple un rol más de "acceso rápido" que decorativo.
+          </p>
+          <p>
+            Durante una transmisión en vivo, la franja de resultados/heat en curso
+            también suele quedar fija en la parte superior o inferior del video,
+            independiente del resto de la página.
+          </p>
+        </article>
+
+        <article class="tarjeta-analisis">
+          <h3>Distribución en columnas</h3>
+          <p>
+            La portada combina un bloque destacado (noticia o evento en vivo a ancho
+            completo) con secciones de noticias en grilla de varias columnas más abajo,
+            similar al patrón de "tarjetas" que vimos en Stab. La sección de
+            calendario/resultados, en cambio, se organiza como una tabla o lista de una
+            sola columna, porque ahí la prioridad es leer datos en orden (fecha, evento,
+            resultado) y no navegar visualmente.
+          </p>
+        </article>
+
+        <article class="tarjeta-analisis">
+          <h3>Comportamiento en mobile</h3>
+          <p>
+            El menú con desplegables (Schedule, Rankings, Surfers, Fantasy) colapsa en
+            un menú hamburguesa con submenús plegables. Las grillas de noticias pasan
+            de varias columnas a una sola, y la tabla de calendario se simplifica u
+            oculta columnas menos importantes (dejando solo fecha y evento visibles,
+            y el resto detrás de un "ver más").
+          </p>
+        </article>
+
+        <article class="tarjeta-analisis">
+          <h3>Nuestra opinión</h3>
+          <p>
+            Tiene sentido priorizar el video en vivo y dejar accesos rápidos siempre
+            visibles, porque es una plataforma pensada para seguir un evento en tiempo
+            real. Lo que ajustaríamos es la cantidad de categorías dentro de "Schedule"
+            y "Rankings" (Championship Tour, Challenger Series, Qualifying Series,
+            Junior Tour, Longboard Tour, Big Wave...): son muchas para un solo
+            desplegable, y en mobile eso significa mucho scroll dentro del menú.
+          </p>
+          <p>
+            Agruparíamos esas categorías en una página propia de "Tours" en vez de
+            listarlas todas en el menú de navegación.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+        <!-- ================= COMPARACIÓN DIRECTA ================= -->
+    <section class="sitio" id="comparacion">
+      <div class="sitio-encabezado">
+        <span class="etiqueta etiqueta--oscura">Síntesis</span>
+        <h2>Comparación directa</h2>
+        <p>
+          Las mismas cuatro preguntas, respondidas lado a lado, para ver en qué
+          se parecen y en qué se diferencian ambos sitios.
+        </p>
+      </div>
+
+      <div class="leyenda">
+        <span class="leyenda-item"><span class="punto punto--stab"></span> stabmag.com</span>
+        <span class="leyenda-item"><span class="punto punto--wsl"></span> worldsurfleague.com</span>
+      </div>
+
+      <div class="comparativa">
+
+        <div class="comparativa-item">
+          <h3>¿Qué se mueve y qué queda fijo?</h3>
+          <div class="comparativa-par">
+            <div class="comparativa-card comparativa-card--stab">
+              <span class="comparativa-tag">Stab</span>
+              <p>Header sticky (logo + buscador). El resto del contenido se desplaza libremente.</p>
+            </div>
+            <div class="comparativa-card comparativa-card--wsl">
+              <span class="comparativa-tag">WSL</span>
+              <p>Header sticky similar, pero con más funciones ancladas (cuenta, menú). En vivo, el marcador del heat también queda fijo.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparativa-item">
+          <h3>¿Cómo se distribuyen las columnas?</h3>
+          <div class="comparativa-par">
+            <div class="comparativa-card comparativa-card--stab">
+              <span class="comparativa-tag">Stab</span>
+              <p>Mezcla de listas de una columna y grillas de mosaico de varias columnas, según la sección.</p>
+            </div>
+            <div class="comparativa-card comparativa-card--wsl">
+              <span class="comparativa-tag">WSL</span>
+              <p>Bloque destacado a ancho completo + grillas de noticias, pero el calendario usa una tabla de una sola columna por fila.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparativa-item">
+          <h3>¿Cómo reacciona en mobile?</h3>
+          <div class="comparativa-par">
+            <div class="comparativa-card comparativa-card--stab">
+              <span class="comparativa-tag">Stab</span>
+              <p>Grillas a una columna, menú a hamburguesa con acordeón de varios niveles.</p>
+            </div>
+            <div class="comparativa-card comparativa-card--wsl">
+              <span class="comparativa-tag">WSL</span>
+              <p>Mismo patrón de colapso, pero además la tabla de calendario recorta columnas para caber en pantalla chica.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparativa-item">
+          <h3>¿Les parece apropiado? ¿Qué ajustarían?</h3>
+          <div class="comparativa-par">
+            <div class="comparativa-card comparativa-card--stab">
+              <span class="comparativa-tag">Stab</span>
+              <p>Sí, pero el menú tiene demasiados niveles anidados para mobile.</p>
+            </div>
+            <div class="comparativa-card comparativa-card--wsl">
+              <span class="comparativa-tag">WSL</span>
+              <p>Sí, pero el desplegable de "Schedule/Rankings" agrupa demasiadas categorías para un solo menú.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="conclusion">
+        En ambos casos el patrón de fondo es el mismo header sticky, contenido en
+        grilla, colapso a una columna en mobile porque los dos son sitios de
+        consumo de contenido, no de tareas puntuales. La diferencia real está en la
+        cantidad de información que cada uno intenta dejar siempre accesible desde
+        el menú: Stab prioriza categorías editoriales, WSL prioriza torneos y
+        resultados en vivo.
+      </p>
+    </section>
