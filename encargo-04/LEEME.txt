@@ -1,0 +1,17 @@
+Municipalidad de Chaitén · maquetas del sitio nuevo
+====================================================
+Abre index.html en el navegador. Las 12 páginas comparten UN solo archivo de estilos: css/styles.css
+
+Plantillas (cada página usa una):
+  T1 Inicio ................ index.html
+  T2 Hub de tarjetas ....... tramites-y-pagos.html, unidades-municipales.html
+  T3 Contenido ............. obras-y-edificacion.html, alcaldia-y-concejo.html, cultura-y-comunidad.html
+  T4 Noticias en tarjetas .. noticias-y-avisos.html
+  T5 Turismo ............... turismo.html, planifica-tu-visita.html
+  T6 Contacto .............. contacto.html
+  T7 Listado con filtros ... transparencia-y-finanzas.html, resultados-de-busqueda.html
+
+Para cambiar colores, espaciado o tipografías, edita las variables al inicio de css/styles.css (bloque :root).
+Los textos entre [corchetes] son marcadores: reemplázalos por el contenido real.
+Las fotos de turismo se cargan desde el sitio actual de la municipalidad (necesitas internet) y llevan crédito.
+Antes de entregar el sitio final, descarga esas fotos a la carpeta img/ y cambia las rutas en css/styles.css.
