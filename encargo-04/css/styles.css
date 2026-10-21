@@ -248,12 +248,12 @@ mark{background:#F6E7C2;color:var(--text);padding:0 2px;border-radius:3px}
 .utility-bar a:hover{color:var(--white);text-decoration:underline}
 .utility-bar a:focus-visible{outline-color:var(--white)}
 .foto{background-size:cover;background-position:center}
-.foto-volcan{background-image:url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/Manto-Blanco-Volcan-Chaiten-Tamara-Catalan-scaled-1.jpg"),linear-gradient(135deg,#003B73,#00489E)}
-.foto-yelcho{background-image:url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/Lago-Yelcho-Enrique-Gesell.jpg"),linear-gradient(135deg,#00489E,#3F6B4A)}
-.foto-corcovado{background-image:url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/VOLCAN-CORCOVADO-MONICA-CARDENAS-1.jpg"),linear-gradient(135deg,#3F6B4A,#003B73)}
-.foto-santalucia{background-image:url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/VILLA-SANTA-LUCIA-MONICA-CARDENAS.jpg"),linear-gradient(135deg,#D9A441,#D66A3D)}
-.foto-atardecer{background-image:url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/Atardecer-en-Chaiten-Alfredo-Miranda-scaled-1.jpg"),linear-gradient(135deg,#D66A3D,#D9A441)}
-.foto-dron{background-image:url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/CHAITEN-DRONE-CEPEDA-19-scaled-1.jpg"),linear-gradient(135deg,#00489E,#003B73)}
+.foto-volcan{background-image:url("../img/volcan.jpg"),url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/Manto-Blanco-Volcan-Chaiten-Tamara-Catalan-scaled-1.jpg"),linear-gradient(135deg,#003B73,#00489E)}
+.foto-yelcho{background-image:url("../img/yelcho.jpg"),url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/Lago-Yelcho-Enrique-Gesell.jpg"),linear-gradient(135deg,#00489E,#3F6B4A)}
+.foto-corcovado{background-image:url("../img/corcovado.jpg"),url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/VOLCAN-CORCOVADO-MONICA-CARDENAS-1.jpg"),linear-gradient(135deg,#3F6B4A,#003B73)}
+.foto-santalucia{background-image:url("../img/santalucia.jpg"),url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/VILLA-SANTA-LUCIA-MONICA-CARDENAS.jpg"),linear-gradient(135deg,#D9A441,#D66A3D)}
+.foto-atardecer{background-image:url("../img/atardecer.jpg"),url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/Atardecer-en-Chaiten-Alfredo-Miranda-scaled-1.jpg"),linear-gradient(135deg,#D66A3D,#D9A441)}
+.foto-dron{background-image:url("../img/dron.jpg"),url("https://www.municipalidadchaiten.cl/wp-content/uploads/2023/12/CHAITEN-DRONE-CEPEDA-19-scaled-1.jpg"),linear-gradient(135deg,#00489E,#003B73)}
 .hero-tur{position:relative;display:flex;align-items:flex-end;min-height:600px;color:var(--white)}
 .hero-tur::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,59,115,.35) 0%,rgba(0,59,115,.92) 100%)}
 .hero-tur .container{position:relative;width:100%;padding-top:var(--s8);padding-bottom:var(--s6)}
@@ -328,3 +328,50 @@ mark{background:#F6E7C2;color:var(--text);padding:0 2px;border-radius:3px}
 .breadcrumb-light a,.breadcrumb-light li,.breadcrumb-light [aria-current]{color:var(--white)}
 .breadcrumb-light li+li::before{color:var(--white)}
 .hero-tur.hero-page{min-height:420px}
+
+/* ---------- personas y retratos ---------- */
+.photo{aspect-ratio:3/4;background-size:cover;background-position:center top;border-radius:var(--r-md);border:1px solid var(--line);background-image:linear-gradient(135deg,#EAF3F8,#B9D3E4)}
+.photo-alcaldesa{background-image:url("../img/alcaldesa.jpg"),linear-gradient(135deg,#EAF3F8,#B9D3E4)}
+.photo-c1{background-image:url("../img/concejal-1.jpg"),linear-gradient(135deg,#EAF3F8,#B9D3E4)}
+.photo-c2{background-image:url("../img/concejal-2.jpg"),linear-gradient(135deg,#EAF3F8,#B9D3E4)}
+.photo-c3{background-image:url("../img/concejal-3.jpg"),linear-gradient(135deg,#EAF3F8,#B9D3E4)}
+.photo-c4{background-image:url("../img/concejal-4.jpg"),linear-gradient(135deg,#EAF3F8,#B9D3E4)}
+.photo-c5{background-image:url("../img/concejal-5.jpg"),linear-gradient(135deg,#EAF3F8,#B9D3E4)}
+.photo-c6{background-image:url("../img/concejal-6.jpg"),linear-gradient(135deg,#EAF3F8,#B9D3E4)}
+.profile{display:grid;grid-template-columns:200px minmax(0,1fr);gap:var(--s5);align-items:center;margin-bottom:var(--s5)}
+.profile h3{margin:0 0 var(--s1)}
+.team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s5);margin-bottom:var(--s5)}
+.person h3{font-size:18px;line-height:26px;margin:var(--s3) 0 0}
+@media (max-width:1023px){.team{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:575px){.profile{grid-template-columns:1fr}.team{grid-template-columns:1fr}}
+
+/* ---------- v3 · cambios de revisión ---------- */
+.tag-ocre-solid{background:var(--ocre);color:var(--text)}
+.quick{grid-template-columns:repeat(3,minmax(0,1fr))}
+.map-embed{display:block;width:100%;height:320px;border:0;border-radius:var(--r-md);background:var(--bg-alt)}
+a.video{text-decoration:none}
+.video-cap{position:absolute;left:var(--s4);bottom:var(--s3);font:600 14px var(--font-title);color:var(--white)}
+.card-media.foto{align-items:flex-start;justify-content:flex-start}
+.avatar{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--bg-alt);color:var(--brand-deep);font:700 14px var(--font-title);flex:none}
+.avatar-lg{width:64px;height:64px;font-size:22px;background:var(--brand);color:var(--white)}
+.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3);margin-bottom:var(--s4)}
+.person-card{display:flex;gap:var(--s3);align-items:center;padding:var(--s3) var(--s4);background:var(--white);border:1px solid var(--line);border-radius:var(--r-md)}
+.person-card strong{display:block;line-height:22px}
+.director{display:flex;gap:var(--s4);align-items:center;padding:var(--s5);background:var(--white);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--sh1);margin-bottom:var(--s4)}
+.director h3{margin:0 0 4px;font-size:22px;line-height:30px}
+.director p{margin:0}
+.article ol{padding-left:var(--s5);margin:0 0 var(--s4)}
+.article ol li{margin-bottom:var(--s2)}
+.news-article{max-width:800px}
+.news-hero{position:relative;height:320px;border-radius:var(--r-lg);margin-bottom:var(--s5)}
+.news-hero .tag{position:absolute;top:var(--s4);left:var(--s4)}
+.lead{font-size:20px;line-height:30px;color:var(--text-2)}
+.share{display:flex;gap:var(--s3);align-items:center;flex-wrap:wrap;margin:var(--s5) 0}
+.events{list-style:none;padding:0;margin:0 0 var(--s4);display:grid;gap:var(--s3)}
+.event{display:flex;gap:var(--s4);align-items:center;padding:var(--s3) var(--s4);background:var(--white);border:1px solid var(--line);border-radius:var(--r-md)}
+.event .day{width:64px;flex:none;text-align:center;background:var(--ocre);color:var(--text);border-radius:var(--r-sm);padding:6px 0;font:800 24px/28px var(--font-title)}
+.event .day small{display:block;color:var(--text);font:700 12px/14px var(--font-title);text-transform:uppercase;letter-spacing:.06em}
+.event strong{display:block}
+button.filter-pill{cursor:pointer;font-family:var(--font-title)}
+@media (max-width:1023px){.quick{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:575px){.quick,.people{grid-template-columns:1fr}.director{flex-direction:column;align-items:flex-start}}
