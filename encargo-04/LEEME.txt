@@ -3,24 +3,31 @@ Municipalidad de Chaitén · sitio nuevo
 Abre index.html en el navegador. Todo el sitio usa UN solo archivo de estilos: css/styles.css
 (y un archivo de comportamiento sin librerías: js/main.js, con js/indice.js como índice del buscador).
 
-PÁGINAS (42)
+PÁGINAS (41)
   Principales (12): index, tramites-y-pagos, obras-y-edificacion, alcaldia-y-concejo, unidades-municipales,
                     transparencia-y-finanzas, noticias-y-avisos, turismo, cultura-y-comunidad, contacto,
                     planifica-tu-visita, resultados-de-busqueda
   Trámites (4) ..... tramite-*.html  (el permiso de circulación lleva al sitio oficial del SEM)
-  Unidades (11) .... unidad-*.html   (una por cada tarjeta de Unidades municipales)
+  Unidades (10) .... unidad-*.html   (una por cada tarjeta de Unidades municipales, según la lista oficial)
   Noticias (9) ..... noticia-1.html a noticia-9.html (misma plantilla)
   Atractivos (6) ... atractivo-*.html (misma plantilla)
 
 QUÉ ES REAL Y QUÉ ES RELLENO
-  Real: alcaldesa y su mensaje, nombres y cargos de las unidades, enlaces oficiales, dirección y teléfono.
+  Real: alcaldesa y su mensaje, concejales (nombres y cargo), nombres y cargos de las unidades, 24 formularios PDF de la DOM,
+        enlaces oficiales, dirección y teléfono, video de YouTube.
   Inventado para rellenar: noticias, documentos de transparencia, eventos, atractivos, historia, trámites con página propia.
-  Por confirmar: horario de atención (se puso lunes a viernes 08:30-14:00 y 15:00-17:30), nombres completos de los concejales,
-                 video de YouTube, juez del Juzgado de Policía Local, textos entre [corchetes].
+  Por confirmar: horario de atención (se puso lunes a viernes 08:30-14:00 y 15:00-17:30), programas y horarios de DIDECO,
+                 correo de DIDECO (el sitio oficial muestra dideco@gmail.com pero enlaza a dideco@mchaiten.cl; se usó el segundo),
+                 textos entre [corchetes].
 
 FOTOS: deja tus archivos en la carpeta img/ con estos nombres exactos y se verán solas:
-  alcaldesa.jpg ................. retrato de la alcaldesa (vertical 3:4)
-  concejal-1.jpg a concejal-6.jpg  retratos del Concejo (vertical 3:4)
+  alcaldesa.jpg ........ Clara Lazcano Fernández (vertical 3:4)
+  concejal-1.jpg ....... Juan Alvarado Torres
+  concejal-2.jpg ....... Víctor Catalán Reyes
+  concejal-3.jpg ....... Camila Vivar Vargas
+  concejal-4.jpg ....... María Soledad López Muñoz
+  concejal-5.jpg ....... Ricardo Barrientos Muñoz
+  concejal-6.jpg ....... Francisco Núñez Martínez
   volcan.jpg, yelcho.jpg, corcovado.jpg, santalucia.jpg, atardecer.jpg, dron.jpg ... fotos de turismo, portada y galería
 Mientras una foto no exista, se muestra la foto del sitio actual (necesitas internet) o un bloque de color.
 Cada foto de turismo lleva el crédito de su autor (Tamara Catalán, Enrique Gesell, Mónica Cárdenas, Alfredo Miranda, Cepeda).

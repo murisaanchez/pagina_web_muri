@@ -375,3 +375,14 @@ a.video{text-decoration:none}
 button.filter-pill{cursor:pointer;font-family:var(--font-title)}
 @media (max-width:1023px){.quick{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:575px){.quick,.people{grid-template-columns:1fr}.director{flex-direction:column;align-items:flex-start}}
+.video-embed{position:relative;aspect-ratio:16/9;border-radius:var(--r-md);overflow:hidden;background:var(--text)}
+.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.doc-list-compact li{padding:var(--s2) var(--s4)}
+
+/* ---------- barra utilitaria en celular: dos filas de tres, bien alineadas ---------- */
+@media (max-width:767px){
+  .utility-bar .container{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;min-height:0;padding-top:var(--s2);padding-bottom:var(--s2)}
+  .utility-bar ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2);width:100%;text-align:center}
+  .utility-bar ul+ul{margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.25)}
+  .utility-bar a{display:block;padding:6px 4px;font-size:12px;line-height:16px}
+}
