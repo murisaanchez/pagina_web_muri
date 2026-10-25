@@ -1,121 +1,163 @@
-/* Municipalidad de Chaitén · comportamiento de filtros y buscador (sin librerías) */
-(function () {
+/* Municipalidad de Chaitén · comportamiento del sitio (sin librerías)
+   1. Menú móvil y buscador del encabezado
+   2. Filtros de documentos de transparencia
+   3. Filtros y orden de noticias
+   4. Buscador del sitio */
+(() => {
   'use strict';
-  var norm = function (s) { return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); };
-  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-  var checked = function (form, name) { return Array.prototype.slice.call(form.querySelectorAll('input[name="' + name + '"]:checked')).map(function (i) { return i.value; }); };
 
-  /* 1) Documentos de transparencia */
-  var fd = document.getElementById('filtros-docs');
-  if (fd) {
-    var items = document.querySelectorAll('.doc-result');
-    var cnt = document.getElementById('contador');
-    var empty = document.getElementById('sin-resultados');
-    var applyDocs = function () {
-      var t = checked(fd, 'tipo'), a = checked(fd, 'anio'), n = 0;
-      items.forEach(function (it) {
-        var ok = (!t.length || t.indexOf(it.dataset.tipo) > -1) && (!a.length || a.indexOf(it.dataset.anio) > -1);
-        it.hidden = !ok; if (ok) n++;
+  const norm = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const checked = (form, name) => [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((i) => i.value);
+
+  /* 1) Encabezado: menú móvil y buscador */
+  const menuBtn = document.querySelector('.menu-btn');
+  const menu = document.getElementById('menu-principal');
+  const searchBox = document.querySelector('.search-toggle');
+  const searchInput = document.getElementById('q-cabecera');
+
+  const setMenu = (open) => {
+    if (!menuBtn || !menu) return;
+    menu.classList.toggle('is-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.querySelector('.visually-hidden').textContent = open ? 'Cerrar menú' : 'Abrir menú';
+  };
+  if (menuBtn && menu) {
+    menuBtn.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', () => setMenu(false));
+  }
+  if (searchBox) {
+    searchBox.addEventListener('toggle', () => { if (searchBox.open && searchInput) searchInput.focus(); });
+  }
+  document.addEventListener('keydown', (ev) => {
+    const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(ev.target.tagName) || ev.target.isContentEditable;
+    if (ev.key === 'Escape') {
+      if (searchBox && searchBox.open) { searchBox.open = false; searchBox.querySelector('summary').focus(); }
+      if (menu && menu.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); }
+    } else if (ev.key === '/' && !typing && !ev.ctrlKey && !ev.metaKey && !ev.altKey && searchBox) {
+      ev.preventDefault();
+      searchBox.open = true;
+      if (searchInput) searchInput.focus();
+    }
+  });
+  document.addEventListener('click', (ev) => {
+    if (searchBox && searchBox.open && !searchBox.contains(ev.target)) searchBox.open = false;
+    if (menu && menu.classList.contains('is-open') && !menu.contains(ev.target) && !menuBtn.contains(ev.target)) setMenu(false);
+  });
+
+  /* 2) Documentos de transparencia */
+  const docsForm = document.getElementById('filtros-docs');
+  if (docsForm) {
+    const items = document.querySelectorAll('.doc-result');
+    const counter = document.getElementById('contador');
+    const empty = document.getElementById('sin-resultados');
+    const applyDocs = () => {
+      const tipos = checked(docsForm, 'tipo');
+      const anios = checked(docsForm, 'anio');
+      let n = 0;
+      items.forEach((item) => {
+        const ok = (!tipos.length || tipos.includes(item.dataset.tipo)) && (!anios.length || anios.includes(item.dataset.anio));
+        item.hidden = !ok;
+        if (ok) n += 1;
       });
-      cnt.textContent = n + (n === 1 ? ' documento' : ' documentos');
+      counter.textContent = `${n} ${n === 1 ? 'documento' : 'documentos'}`;
       empty.hidden = n > 0;
     };
-    fd.addEventListener('change', applyDocs);
-    fd.addEventListener('reset', function () { setTimeout(applyDocs, 0); });
+    docsForm.addEventListener('change', applyDocs);
+    docsForm.addEventListener('reset', () => setTimeout(applyDocs, 0));
     applyDocs();
   }
 
-  /* 2) Noticias: filtro por categoría y orden */
-  var grid = document.getElementById('grilla-noticias');
-  if (grid) {
-    var pills = document.querySelectorAll('.filter-pill');
-    var sel = document.getElementById('orden-noticias');
-    var cn = document.getElementById('contador-noticias');
-    var none = document.getElementById('sin-noticias');
-    var cat = 'Todas';
-    var cards = Array.prototype.slice.call(grid.querySelectorAll('.news-item'));
-    var renderNews = function () {
-      var dir = sel.value;
-      cards.sort(function (a, b) {
-        if (dir === 'az') return a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent, 'es');
-        return dir === 'asc' ? a.dataset.fecha.localeCompare(b.dataset.fecha) : b.dataset.fecha.localeCompare(a.dataset.fecha);
+  /* 3) Noticias: filtro por categoría y orden */
+  const newsGrid = document.getElementById('grilla-noticias');
+  if (newsGrid) {
+    const pills = document.querySelectorAll('.filter-pill');
+    const order = document.getElementById('orden-noticias');
+    const counter = document.getElementById('contador-noticias');
+    const none = document.getElementById('sin-noticias');
+    const cards = [...newsGrid.querySelectorAll('.news-item')];
+    let category = 'Todas';
+    const renderNews = () => {
+      cards.sort((a, b) => {
+        if (order.value === 'az') return a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent, 'es');
+        return order.value === 'asc' ? a.dataset.fecha.localeCompare(b.dataset.fecha) : b.dataset.fecha.localeCompare(a.dataset.fecha);
       });
-      var n = 0;
-      cards.forEach(function (c) {
-        grid.appendChild(c);
-        var ok = cat === 'Todas' || c.dataset.cat === cat;
-        c.hidden = !ok; if (ok) n++;
+      let n = 0;
+      cards.forEach((card) => {
+        newsGrid.appendChild(card);
+        const ok = category === 'Todas' || card.dataset.cat === category;
+        card.hidden = !ok;
+        if (ok) n += 1;
       });
-      cn.textContent = n + (n === 1 ? ' noticia' : ' noticias');
+      counter.textContent = `${n} ${n === 1 ? 'noticia' : 'noticias'}`;
       none.hidden = n > 0;
     };
-    pills.forEach(function (p) {
-      p.addEventListener('click', function () {
-        cat = p.dataset.cat;
-        pills.forEach(function (x) { x.removeAttribute('aria-current'); });
-        p.setAttribute('aria-current', 'true');
-        renderNews();
-      });
-    });
-    sel.addEventListener('change', renderNews);
+    pills.forEach((pill) => pill.addEventListener('click', () => {
+      category = pill.dataset.cat;
+      pills.forEach((p) => p.setAttribute('aria-pressed', String(p === pill)));
+      renderNews();
+    }));
+    order.addEventListener('change', renderNews);
     renderNews();
   }
 
-  /* 3) Buscador del sitio */
-  var box = document.getElementById('resultados');
-  if (box && window.INDICE) {
-    var q = new URLSearchParams(location.search).get('q') || '';
-    var input = document.getElementById('q');
-    if (input) input.value = q;
-    var fs = document.getElementById('filtros-busqueda');
-    var ord = document.getElementById('orden-busqueda');
-    var cb = document.getElementById('contador-busqueda');
-    var sn = document.getElementById('sin-busqueda');
-    var terms = norm(q).split(/\s+/).filter(Boolean);
-    var score = function (it) {
-      var hay = norm(it.t + ' ' + it.s + ' ' + it.c), tt = norm(it.t), sc = 1;
-      for (var i = 0; i < terms.length; i++) {
-        if (hay.indexOf(terms[i]) < 0) return 0;
-        sc += 1 + (tt.indexOf(terms[i]) > -1 ? 2 : 0);
+  /* 4) Buscador del sitio */
+  const results = document.getElementById('resultados');
+  if (results && window.INDICE) {
+    const query = new URLSearchParams(location.search).get('q') || '';
+    const input = document.getElementById('q');
+    if (input) input.value = query;
+    const filters = document.getElementById('filtros-busqueda');
+    const order = document.getElementById('orden-busqueda');
+    const counter = document.getElementById('contador-busqueda');
+    const none = document.getElementById('sin-busqueda');
+    const terms = norm(query).split(/\s+/).filter(Boolean);
+
+    const score = (it) => {
+      const text = norm(`${it.t} ${it.s} ${it.c}`);
+      const title = norm(it.t);
+      let sc = 1;
+      for (const term of terms) {
+        if (!text.includes(term)) return 0;
+        sc += 1 + (title.includes(term) ? 2 : 0);
       }
       return sc;
     };
-    var mark = function (text) {
-      var n = norm(text), r = [];
-      terms.forEach(function (t) {
-        if (t.length < 2) return;
-        var i = 0;
-        while ((i = n.indexOf(t, i)) > -1) { r.push([i, i + t.length]); i += t.length; }
+    const mark = (text) => {
+      const n = norm(text);
+      const ranges = [];
+      terms.filter((t) => t.length > 1).forEach((t) => {
+        for (let i = n.indexOf(t); i > -1; i = n.indexOf(t, i + t.length)) ranges.push([i, i + t.length]);
       });
-      r.sort(function (a, b) { return a[0] - b[0]; });
-      var out = '', pos = 0;
-      r.forEach(function (x) {
-        if (x[0] < pos) return;
-        out += esc(text.slice(pos, x[0])) + '<mark>' + esc(text.slice(x[0], x[1])) + '</mark>';
-        pos = x[1];
+      ranges.sort((a, b) => a[0] - b[0]);
+      let out = '';
+      let pos = 0;
+      ranges.forEach(([from, to]) => {
+        if (from < pos) return;
+        out += `${esc(text.slice(pos, from))}<mark>${esc(text.slice(from, to))}</mark>`;
+        pos = to;
       });
       return out + esc(text.slice(pos));
     };
-    var renderSearch = function () {
-      var cats = checked(fs, 'cat');
-      var list = window.INDICE.map(function (it) { return { it: it, s: score(it) }; })
-        .filter(function (x) { return x.s > 0 && (!cats.length || cats.indexOf(x.it.c) > -1); });
-      var o = ord.value;
-      list.sort(function (a, b) {
-        if (o === 'az') return a.it.t.localeCompare(b.it.t, 'es');
-        if (o === 'desc') return b.it.f.localeCompare(a.it.f);
+    const renderSearch = () => {
+      const cats = checked(filters, 'cat');
+      const list = window.INDICE.map((it) => ({ it, s: score(it) }))
+        .filter((x) => x.s > 0 && (!cats.length || cats.includes(x.it.c)));
+      list.sort((a, b) => {
+        if (order.value === 'az') return a.it.t.localeCompare(b.it.t, 'es');
+        if (order.value === 'desc') return b.it.f.localeCompare(a.it.f);
         return b.s - a.s || a.it.t.localeCompare(b.it.t, 'es');
       });
-      box.innerHTML = list.map(function (x) {
-        var it = x.it, ex = /^https?:/.test(it.u) ? ' target="_blank" rel="noopener"' : '';
-        return '<article class="result"><span class="tag">' + esc(it.c) + '</span><h3><a href="' + esc(it.u) + '"' + ex + '>' + mark(it.t) + '</a></h3><p>' + mark(it.s) + '</p></article>';
+      results.innerHTML = list.map(({ it }) => {
+        const external = /^https?:/.test(it.u) ? ' target="_blank" rel="noopener"' : '';
+        return `<article class="result"><span class="tag">${esc(it.c)}</span><h3><a href="${esc(it.u)}"${external}>${mark(it.t)}</a></h3><p>${mark(it.s)}</p></article>`;
       }).join('');
-      cb.textContent = list.length + (list.length === 1 ? ' resultado' : ' resultados') + (q ? ' para «' + q + '»' : '');
-      sn.hidden = list.length > 0;
+      counter.textContent = `${list.length} ${list.length === 1 ? 'resultado' : 'resultados'}${query ? ` para «${query}»` : ''}`;
+      none.hidden = list.length > 0;
     };
-    fs.addEventListener('change', renderSearch);
-    fs.addEventListener('reset', function () { setTimeout(renderSearch, 0); });
-    ord.addEventListener('change', renderSearch);
+    filters.addEventListener('change', renderSearch);
+    filters.addEventListener('reset', () => setTimeout(renderSearch, 0));
+    order.addEventListener('change', renderSearch);
     renderSearch();
   }
 })();
